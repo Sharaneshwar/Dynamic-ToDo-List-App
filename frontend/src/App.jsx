@@ -1,7 +1,7 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { DndContext } from '@dnd-kit/core';
+import { useSensor, useSensors, PointerSensor, DndContext } from '@dnd-kit/core';
 import './App.css';
 import TaskSection from './components/TaskSection';
 import TaskForm from './components/TaskForm';
@@ -43,12 +43,20 @@ const App = () => {
         }
     };
 
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 8,
+            },
+        })
+    )
+
     return (
         <div className="App">
             <h1>Dynamic To-Do List</h1>
             <h2>By Sharaneshwar Punjal</h2>
             <TaskForm addTask={addTask} />
-            <DndContext onDragEnd={handleDragEnd}>
+            <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                 <div className="task-sections">
                     <TaskSection title="Pending" tasks={tasks.filter((task) => task.status === 'Pending')} updateTaskStatus={updateTaskStatus} />
                     <TaskSection title="In Progress" tasks={tasks.filter((task) => task.status === 'In Progress')} updateTaskStatus={updateTaskStatus} />

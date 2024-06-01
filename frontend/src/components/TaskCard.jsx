@@ -31,7 +31,7 @@ const TaskCard = ({ task, updateTaskStatus }) => {
             <h3>{task.title}</h3>
             <p>{task.description}</p>
             {nextStatus && (
-                <button onMouseUp={() => updateTaskStatus(task._id, nextStatus)}>
+                <button onClick={() => updateTaskStatus(task._id, nextStatus)}>
                     {task.status === 'Pending' ? 'Start' : 'Complete'}
                 </button>
             )}
