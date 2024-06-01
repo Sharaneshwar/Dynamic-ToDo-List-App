@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Buy groceries",
+        "description": "Purchase vegetables, fruits, milk, and bread.",
+        "status": "Pending"
+    },
+    {
+        "title": "Finish project report",
+        "description": "Complete the final draft of the project report for the client.",
+        "status": "In Progress"
+    },
+    {
+        "title": "Book flight tickets",
+        "description": "Book tickets for the upcoming business trip to New York.",
+        "status": "Pending"
+    },
+    {
+        "title": "Prepare presentation",
+        "description": "Create slides for the Monday meeting presentation.",
+        "status": "In Progress"
+    },
+    {
+        "title": "Schedule doctor appointment",
+        "description": "Call the clinic to schedule an appointment for a routine check-up.",
+        "status": "Pending"
+    }
+]

@@ -5,7 +5,7 @@ import TaskCard from './TaskCard';
 
 const TaskSection = ({ title, tasks = [], updateTaskStatus }) => {
     const { setNodeRef } = useDroppable({
-        id: title.replace(' ', '_'),
+        id: title,
     });
 
     return (

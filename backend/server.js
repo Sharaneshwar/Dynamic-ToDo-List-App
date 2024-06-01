@@ -28,12 +28,12 @@ const taskSchema = new mongoose.Schema({
 const Task = mongoose.model('Task', taskSchema);
 
 // Routes
-app.get('/tasks', async (req, res) => {
+app.post('/tasks', async (req, res) => {
     const tasks = await Task.find();
     res.json(tasks);
 });
 
-app.post('/tasks', async (req, res) => {
+app.post('/newTask', async (req, res) => {
     console.log(req.body);
     const newTask = new Task(req.body);
     await newTask.save();

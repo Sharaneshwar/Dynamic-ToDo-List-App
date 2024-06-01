@@ -12,12 +12,23 @@ const TaskForm = ({ addTask }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
-            <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
+        <form className="task-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Title"
+                required
+            />
+            <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
+                rows="5"
+            />
             <button type="submit">Add Task</button>
         </form>
     );
-}
+};
 
-export default TaskForm
+export default TaskForm;
