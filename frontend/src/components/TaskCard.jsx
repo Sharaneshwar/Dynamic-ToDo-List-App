@@ -5,7 +5,6 @@ import { useDraggable } from '@dnd-kit/core';
 import { MdDeleteOutline } from 'react-icons/md';
 
 const TaskCard = ({ task, updateTaskStatus, deleteTask }) => {
-const TaskCard = ({ task, updateTaskStatus, deleteTask }) => {
     const nextStatus = task.status === 'Pending' ? 'In Progress' : task.status === 'In Progress' ? 'Completed' : null;
 
     const { attributes, listeners, setNodeRef, transform, transition } = useDraggable({
