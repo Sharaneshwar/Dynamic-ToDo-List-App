@@ -35,6 +35,12 @@ const App = () => {
         });
     };
 
+    const deleteTask = (id) => {
+        axios.delete(`http://localhost:5000/tasks/${id}`).then(() => {
+            setTasks(tasks.filter((task) => task._id !== id));
+        });
+    };
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
 
