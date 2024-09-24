@@ -1,8 +1,9 @@
 // src/components/TaskCard.jsx
 import React from 'react';
+import { MdDeleteOutline  } from "react-icons/md";
 import { useDraggable } from '@dnd-kit/core';
 
-const TaskCard = ({ task, updateTaskStatus }) => {
+const TaskCard = ({ task, updateTaskStatus, deleteTask }) => {
     const nextStatus = task.status === 'Pending' ? 'In Progress' : task.status === 'In Progress' ? 'Completed' : null;
 
     const { attributes, listeners, setNodeRef, transform, transition } = useDraggable({
@@ -28,7 +29,10 @@ const TaskCard = ({ task, updateTaskStatus }) => {
 
     return (
         <div className="task-card" ref={setNodeRef} style={style} {...listeners} {...attributes}>
-            <h3>{task.title}</h3>
+            <div className="top">
+                <h3>{task.title}</h3>
+                <MdDeleteOutline onClick={() => deleteTask(task._id)} />
+            </div>
             <p>{task.description}</p>
             {nextStatus && (
                 <button onClick={() => updateTaskStatus(task._id, nextStatus)}>

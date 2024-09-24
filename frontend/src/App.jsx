@@ -9,14 +9,12 @@ import TaskForm from './components/TaskForm';
 const App = () => {
     const [tasks, setTasks] = useState([]);
 
-    // Fetch tasks from the server
     useEffect(() => {
         axios.post('http://localhost:5000/tasks').then((response) => {
             setTasks(response.data);
         });
     }, []);
 
-    // Add a new task
     const addTask = (title, description) => {
         const newTask = { title, description, status: 'Pending' };
         axios.post('http://localhost:5000/newTask', newTask).then((response) => {
@@ -24,7 +22,6 @@ const App = () => {
         });
     };
 
-    // Update task status
     const updateTaskStatus = (id, newStatus) => {
         const task = tasks.find((task) => task._id === id);
         const updatedTask = { ...task, status: newStatus, timestamp: newStatus === 'Completed' ? new Date() : task.timestamp };
@@ -33,7 +30,12 @@ const App = () => {
         });
     };
 
-    // Handle drag and drop
+    const deleteTask = (id) => {
+        axios.delete(`http://localhost:5000/tasks/${id}`).then(() => {
+            setTasks(tasks.filter((task) => task._id !== id));
+        });
+    };
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
 
@@ -58,9 +60,9 @@ const App = () => {
             <TaskForm addTask={addTask} />
             <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                 <div className="task-sections">
-                    <TaskSection title="Pending" tasks={tasks.filter((task) => task.status === 'Pending')} updateTaskStatus={updateTaskStatus} />
-                    <TaskSection title="In Progress" tasks={tasks.filter((task) => task.status === 'In Progress')} updateTaskStatus={updateTaskStatus} />
-                    <TaskSection title="Completed" tasks={tasks.filter((task) => task.status === 'Completed')} updateTaskStatus={updateTaskStatus} />
+                    <TaskSection title="Pending" tasks={tasks.filter((task) => task.status === 'Pending')} updateTaskStatus={updateTaskStatus} deleteTask={deleteTask} />
+                    <TaskSection title="In Progress" tasks={tasks.filter((task) => task.status === 'In Progress')} updateTaskStatus={updateTaskStatus} deleteTask={deleteTask} />
+                    <TaskSection title="Completed" tasks={tasks.filter((task) => task.status === 'Completed')} updateTaskStatus={updateTaskStatus} deleteTask={deleteTask} />
                 </div>
             </DndContext>
         </div>

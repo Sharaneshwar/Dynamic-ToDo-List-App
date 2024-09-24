@@ -45,6 +45,11 @@ app.put('/tasks/:id', async (req, res) => {
     res.json(task);
 });
 
+app.delete('/tasks/:id', async (req, res) => {
+    const task = await Task.findByIdAndDelete(req.params.id);
+    res.json(task);
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
