@@ -2,7 +2,6 @@
 import React from 'react';
 import { MdDeleteOutline  } from "react-icons/md";
 import { useDraggable } from '@dnd-kit/core';
-import { MdDeleteOutline } from 'react-icons/md';
 
 const TaskCard = ({ task, updateTaskStatus, deleteTask }) => {
     const nextStatus = task.status === 'Pending' ? 'In Progress' : task.status === 'In Progress' ? 'Completed' : null;
