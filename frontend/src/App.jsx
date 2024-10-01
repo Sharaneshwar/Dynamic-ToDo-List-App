@@ -30,9 +30,12 @@ const App = () => {
     };
 
     const deleteTask = (id) => {
-        axios.delete(`http://localhost:5000/tasks/${id}`).then(() => {
-            setTasks(tasks.filter((task) => task._id !== id));
-        });
+        const confirmed = window.confirm("Are you sure you want to delete this task?");
+        if (confirmed) {
+            axios.delete(`http://localhost:5000/tasks/${id}`).then(() => {
+                setTasks(tasks.filter((task) => task._id !== id));
+            });
+        }
     };
 
     const handleDragEnd = (event) => {
