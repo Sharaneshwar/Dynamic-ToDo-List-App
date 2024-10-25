@@ -76,6 +76,25 @@ app.put('/tasks/:id', async (req, res) => {
     }
 });
 
+// Edit a task
+app.put('/tasks/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, description, priority, dueDate } = req.body;
+
+    try {
+        await pool.query(
+            'UPDATE tasks SET title = ?, description = ?, priority = ?, dueDate = ? WHERE id = ?',
+            [title, description || '', priority, dueDate ? new Date(dueDate) : null, id]
+        );
+
+        const [updatedTask] = await pool.query('SELECT * FROM tasks WHERE id = ?', [id]);
+        res.json(updatedTask[0]);
+    } catch (err) {
+        console.error('Error updating task:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 // Delete a task by ID
 app.delete('/tasks/:id', async (req, res) => {
     const { id } = req.params;

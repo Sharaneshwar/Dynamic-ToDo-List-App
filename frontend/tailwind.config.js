@@ -5,7 +5,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Quicksand', 'sans-serif'],
+      sans: ['Figtree', 'sans-serif'],
     },
   },
   plugins: [],
